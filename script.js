@@ -48,9 +48,12 @@ var loadSchedule = function(){
             scheduleText.addClass('future').text(text);
             //future
         }
-        var saveButton = $('<p>');
+        var saveButton = $('<div>');
         saveButton.addClass('saveBtn').text("SAVE");
         // saves text to local storage
+        saveButton.on("click",function(){
+            console.log("Button clicked "+scheduleText.text());
+        });
         //saveButton.addEventListener("click", function(){
             //save to local storage
         //})
