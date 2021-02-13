@@ -30,7 +30,7 @@ var loadSchedule = function(){
         var timeSlot = $('<p>'+moment(timesMorning[i], "hh").format('LT')+'</p>');
         timeSlot.addClass("hour");
 
-        var scheduleText = $('<p>');
+        var scheduleText = $("<p contenteditable='true'>");
         var text = " PLACEHOLDER ";
         //Can be edited somehow
         if(timesMorning[i]==number){
@@ -51,7 +51,9 @@ var loadSchedule = function(){
         var saveButton = $('<p>');
         saveButton.addClass('saveBtn').text("SAVE");
         // saves text to local storage
-
+        //saveButton.addEventListener("click", function(){
+            //save to local storage
+        //})
 
         // Add them all
         scheduleSlot.append(timeSlot);
