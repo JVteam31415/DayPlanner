@@ -15,22 +15,24 @@
     //add css class based on past, present, future
     //add to container
 var loadSchedule = function(){
-    var timesMorning = ["09","10","11","12","01","02","03","04","05"];
-    var past = true; //only if day already started, fix
+    var timesMorning = ["09","10","11","12","13","14","15","16","17"];
     var schedule = $('#timeblock');
+    var number = moment().format("HH");
+    var past = (number>="09"); 
+
     for (var i=0;i<timesMorning.length;i++){
-        var number = moment().format("hh");
         console.log(".."+number+".."+timesMorning[i]);
 
         var scheduleSlot = $('<div>');
         scheduleSlot.addClass("time-block");
         scheduleSlot.addClass("row");
 
-        var timeSlot = $('<p>'+timesMorning[i]+'</p>');
+        var timeSlot = $('<p>'+moment(timesMorning[i], "hh").format('LT')+'</p>');
         timeSlot.addClass("hour");
 
         var scheduleText = $('<p>');
         var text = " PLACEHOLDER ";
+        //Can be edited somehow
         if(timesMorning[i]==number){
             console.log("present");
             past = false;
@@ -47,7 +49,11 @@ var loadSchedule = function(){
             //future
         }
         var saveButton = $('<p>');
-        saveButton.addClass('saveBtn').text("X");
+        saveButton.addClass('saveBtn').text("SAVE");
+        // saves text to local storage
+
+
+        // Add them all
         scheduleSlot.append(timeSlot);
         scheduleSlot.append(scheduleText);
         scheduleSlot.append(saveButton);
