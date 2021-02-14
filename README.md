@@ -8,3 +8,4 @@ I learned how to use localStorage, moment.js, jquery.js, and how to create new e
 
 I, James VanderKam, worked alone on this assignment.
 
+Website deployed here: https://jvteam31415.github.io/DayPlanner/
