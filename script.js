@@ -1,4 +1,9 @@
-
+for(var i=0;i<9;i++){
+    if(null==localStorage.getItem('dayPlannerValues'+i)){
+        
+        localStorage.setItem('dayPlannerValues'+i,"                     ");
+    }
+}
 
 
 
@@ -21,7 +26,6 @@ var loadSchedule = function(){
     var past = (number>="09"); 
 
     for (var i=0;i<timesMorning.length;i++){
-        console.log(".."+number+".."+timesMorning[i]);
 
         var scheduleSlot = $('<div>');
         scheduleSlot.addClass("time-block");
@@ -30,38 +34,44 @@ var loadSchedule = function(){
         var timeSlot = $('<p>'+moment(timesMorning[i], "hh").format('LT')+'</p>');
         timeSlot.addClass("hour");
 
-        var scheduleText = $("<p contenteditable='true'>");
-        var text = " PLACEHOLDER ";
+        var scheduleText = $("<div contenteditable='true'>");
+        scheduleText.addClass("textClass");
+        const dpv = localStorage.getItem("dayPlannerValues"+i);
+        var text = dpv;
         //Can be edited somehow
         if(timesMorning[i]==number){
-            console.log("present");
             past = false;
             scheduleText.addClass('present').text(text);
         }
         else if(past){
-            console.log("past");
             scheduleText.addClass('past').text(text);
             //it's past
         }
         else{
-            console.log("future");
             scheduleText.addClass('future').text(text);
             //future
         }
-        var saveButton = $('<div>');
+        var saveButton = $('<a>');
         saveButton.addClass('saveBtn').text("SAVE");
-        // saves text to local storage
-        saveButton.on("click",function(){
-            console.log("Button clicked "+scheduleText.text());
-        });
+       
         //saveButton.addEventListener("click", function(){
             //save to local storage
         //})
-
         // Add them all
+        var index = $('<p hidden>');
+        index.text(""+i);
         scheduleSlot.append(timeSlot);
         scheduleSlot.append(scheduleText);
         scheduleSlot.append(saveButton);
+        scheduleSlot.append(index);
+         // saves text to local storage
+        scheduleSlot.on("click",'a',function(){
+            var inputText = this.parentNode.childNodes[1].childNodes[0].nodeValue;
+            var ind = this.parentNode.childNodes[3].childNodes[0].nodeValue;
+            localStorage.removeItem("dayPlannerValues"+ind);
+            localStorage.setItem("dayPlannerValues"+ind,inputText );
+        });
+
         schedule.append(scheduleSlot);
 
 
