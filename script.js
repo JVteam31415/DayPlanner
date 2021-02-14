@@ -31,7 +31,7 @@ var loadSchedule = function(){
         scheduleSlot.addClass("time-block");
         scheduleSlot.addClass("row");
 
-        var timeSlot = $('<p>'+moment(timesMorning[i], "hh").format('LT')+'</p>');
+        var timeSlot = $('<div>'+moment(timesMorning[i], "hh").format('LT')+'</div>');
         timeSlot.addClass("hour");
 
         var scheduleText = $("<div contenteditable='true'>");
